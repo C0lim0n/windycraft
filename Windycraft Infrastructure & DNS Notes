@@ -1,0 +1,171 @@
+# WindyCraft — Infrastructure & DNS Notes
+
+## 1. Domain
+
+**Domain:** `windycraft.com`
+
+The domain is registered and managed through GoDaddy.
+
+GoDaddy is currently being used for DNS management.
+
+---
+
+## 2. Website Hosting
+
+The website is hosted using **GitHub Pages**.
+
+GitHub repository:
+
+`c0lim0n/windycraft`
+
+GitHub Pages URL:
+
+`https://c0lim0n.github.io/windycraft/`
+
+The custom domain configured in GitHub Pages is:
+
+`windycraft.com`
+
+The website is therefore accessed publicly as:
+
+`https://windycraft.com`
+
+The browser remains on `windycraft.com`; it does not visibly redirect to the GitHub Pages URL.
+
+---
+
+## 3. Current DNS Configuration
+
+### Apex / Root Domain
+
+The root domain `windycraft.com` uses four A records pointing to GitHub Pages:
+
+| Type | Host | Value             |
+| ---- | ---- | ----------------- |
+| A    | @    | `185.199.108.153` |
+| A    | @    | `185.199.109.153` |
+| A    | @    | `185.199.110.153` |
+| A    | @    | `185.199.111.153` |
+
+These are GitHub Pages' documented IP addresses for apex/custom domains.
+
+---
+
+### WWW Subdomain
+
+The `www` hostname uses a CNAME:
+
+| Type  | Host | Value               |
+| ----- | ---- | ------------------- |
+| CNAME | www  | `c0lim0n.github.io` |
+
+This allows:
+
+`www.windycraft.com`
+
+to resolve to the GitHub Pages site.
+
+---
+
+## 4. Why Four A Records Exist
+
+The four A records are not four servers that I personally manage.
+
+They are GitHub Pages infrastructure addresses provided by GitHub for custom-domain configuration.
+
+All four are configured so that the root domain can correctly reach GitHub Pages.
+
+---
+
+## 5. Website Files
+
+The repository currently contains:
+
+`index.html`
+
+This is the main homepage.
+
+Example structure:
+
+```text
+windycraft/
+└── index.html
+```
+
+Additional documentation files can exist in the repository without affecting the homepage, provided they do not replace or modify `index.html`.
+
+For example:
+
+```text
+windycraft/
+├── index.html
+└── documentation.md
+```
+
+The Markdown file does not affect the HTML homepage.
+
+---
+
+## 6. Important DNS Rule
+
+Do not delete the four GitHub Pages A records unless the website is intentionally being moved away from GitHub Pages.
+
+Do not change the `www` CNAME unless the `www` configuration is intentionally being changed.
+
+Other future subdomains can be configured separately.
+
+Example:
+
+`play.windycraft.com`
+
+is independent from:
+
+`windycraft.com`
+
+and can have its own DNS configuration.
+
+---
+
+## 7. Hosting vs Domain
+
+The domain and hosting are separate:
+
+**GoDaddy**
+→ Domain registration + DNS management
+
+**GitHub Pages**
+→ Website hosting
+
+The domain tells browsers where to find the website, while GitHub Pages provides the actual website files.
+
+---
+
+## 8. Current Status
+
+As of October 2026:
+
+* Domain is working.
+* GitHub Pages is working.
+* Custom domain is verified.
+* `windycraft.com` successfully displays the test `index.html`.
+* DNS configuration is working.
+* No VPS is currently required for the website.
+* Website hosting is currently provided by GitHub Pages.
+
+---
+
+## 9. Future Changes
+
+Before changing DNS records, check whether the record is being used by:
+
+* GitHub Pages
+* Minecraft / Exaroton
+* Email
+* Any future WindyCraft service
+* Other subdomains
+
+Keep a record of every DNS change and its purpose.
+
+**Current principle:**
+
+> Change only the DNS record required for the specific service. Avoid replacing or deleting unrelated records.
