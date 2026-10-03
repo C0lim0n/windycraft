@@ -1,10 +1,444 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Windycraft</title>
-  </head>
-  <body>
-    <h1>Test</h1>
-    <p>Hosted by Github</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="WindyCraft — projects, experiments, games, and things worth building.">
+
+    <title>WindyCraft</title>
+
+    <style>
+        :root {
+            --background: #0b1020;
+            --surface: #121a2e;
+            --surface-light: #1a2642;
+            --text: #f5f7ff;
+            --muted: #9ba8c7;
+            --accent: #7c9cff;
+            --accent-2: #8ee3c6;
+            --border: rgba(255, 255, 255, 0.09);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: var(--text);
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(124, 156, 255, 0.18),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(142, 227, 198, 0.12),
+                    transparent 30%
+                ),
+                var(--background);
+
+            line-height: 1.6;
+        }
+
+        /* ---------- Navigation ---------- */
+
+        nav {
+            width: min(1100px, calc(100% - 40px));
+            margin: auto;
+
+            padding: 24px 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        nav a {
+            margin-left: 24px;
+
+            color: var(--muted);
+            text-decoration: none;
+
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        /* ---------- Main ---------- */
+
+        main {
+            width: min(1100px, calc(100% - 40px));
+            margin: auto;
+        }
+
+        /* ---------- Hero ---------- */
+
+        .hero {
+            min-height: 72vh;
+
+            display: grid;
+            place-items: center;
+
+            text-align: center;
+
+            padding: 70px 0;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 7px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            color: var(--accent-2);
+
+            font-size: 0.85rem;
+
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: clamp(3.2rem, 10vw, 7rem);
+
+            line-height: 0.95;
+
+            letter-spacing: -0.06em;
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            margin: 28px auto 0;
+
+            color: var(--muted);
+
+            font-size: 1.15rem;
+        }
+
+        /* ---------- Buttons ---------- */
+
+        .buttons {
+            margin-top: 32px;
+
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            color: var(--background);
+
+            background: var(--text);
+
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .button.secondary {
+            color: var(--text);
+
+            background: var(--surface-light);
+
+            border: 1px solid var(--border);
+        }
+
+        /* ---------- Sections ---------- */
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            margin: 0 0 12px;
+
+            font-size: 2rem;
+        }
+
+        .section-intro {
+            max-width: 650px;
+
+            margin-bottom: 32px;
+
+            color: var(--muted);
+        }
+
+        /* ---------- Cards ---------- */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .card {
+            padding: 26px;
+
+            border-radius: 18px;
+
+            background: rgba(18, 26, 46, 0.78);
+
+            border: 1px solid var(--border);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(124, 156, 255, 0.35);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin-bottom: 0;
+
+            color: var(--muted);
+        }
+
+        /* ---------- Footer ---------- */
+
+        footer {
+            width: min(1100px, calc(100% - 40px));
+
+            margin: auto;
+
+            padding: 40px 0 50px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 0.9rem;
+        }
+
+        /* ---------- Mobile ---------- */
+
+        @media (max-width: 750px) {
+
+            nav a {
+                display: none;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 65vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="logo">
+            WINDYCRAFT
+        </div>
+
+        <div>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <div>
+
+                <span class="badge">
+                    A work in progress
+                </span>
+
+                <h1>
+                    WindyCraft
+                </h1>
+
+                <p>
+                    A small corner of the internet for experiments,
+                    projects, games, ideas, and whatever comes next.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        class="button"
+                        href="#projects"
+                    >
+                        Explore
+                    </a>
+
+                    <a
+                        class="button secondary"
+                        href="#about"
+                    >
+                        About WindyCraft
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- About -->
+
+        <section id="about">
+
+            <h2 class="section-title">
+                About
+            </h2>
+
+            <p class="section-intro">
+                WindyCraft is being built one piece at a time.
+                This page is the starting point — simple, fast,
+                and intentionally free of unnecessary machinery.
+            </p>
+
+        </section>
+
+
+        <!-- Projects -->
+
+        <section id="projects">
+
+            <h2 class="section-title">
+                Projects
+            </h2>
+
+            <p class="section-intro">
+                This space can grow as new projects come online.
+            </p>
+
+
+            <div class="cards">
+
+                <article class="card">
+
+                    <h3>
+                        🎮 Games
+                    </h3>
+
+                    <p>
+                        Experiments and future indie game projects
+                        made with curiosity and a questionable amount
+                        of persistence.
+                    </p>
+
+                </article>
+
+
+                <article class="card">
+
+                    <h3>
+                        🛠️ Experiments
+                    </h3>
+
+                    <p>
+                        Small tools, websites, automation ideas,
+                        and technical experiments that deserve
+                        a place to exist.
+                    </p>
+
+                </article>
+
+
+                <article class="card">
+
+                    <h3>
+                        🌐 The Lab
+                    </h3>
+
+                    <p>
+                        A place for things that don't have a category
+                        yet. Those are usually the interesting ones.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        © 2026 WindyCraft. Built from scratch.
+
+    </footer>
+
+</body>
 </html>
+```
